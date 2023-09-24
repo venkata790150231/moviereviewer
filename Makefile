@@ -1,7 +1,7 @@
 .PHONY: run lint test test-e2e install prod-install clean
 
 run: install
-	./venv/bin/python -m streamlit run streamlit_app.py
+	./venv/bin/python -m streamlit run Movie_Review_Aggregator.py
 
 lint: install
 	./venv/bin/python -m black .
