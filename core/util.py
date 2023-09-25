@@ -10,6 +10,7 @@ selector_dict = {
     "123telugu": ".post-content",
     "sakshi": ".fullstory .offset-tb1",
     "eenadu": ".fullstory .text-justify",
+    "andhrabhoomi": ".content div[property='content:encoded']",
     "andhrajyothy": ".category_desc",
     "telugubulletin": ".tdc-zone .tdb_single_content"
 }
