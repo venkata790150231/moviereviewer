@@ -16,7 +16,7 @@ def get_data():
     # Make an asynchronous call to an API or database
     result = news_post_download(input)
     print(result)
-    chat = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo-16k-0613")
+    chat = ChatOpenAI(temperature=0, model_name="gpt-4")
     response_schemas = [
         ResponseSchema(name="post", description="new york times style news article"),
         ResponseSchema(name="title", description="title of news article")

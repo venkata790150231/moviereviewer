@@ -1,7 +1,9 @@
 import streamlit as st
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
+from dotenv import load_dotenv
 
+load_dotenv()
 from core.util import movie_review_download
 
 placeholders = {

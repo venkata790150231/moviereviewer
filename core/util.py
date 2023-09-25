@@ -11,6 +11,8 @@ selector_dict = {
     "sakshi": ".fullstory .offset-tb1",
     "eenadu": ".fullstory .text-justify",
     "andhrabhoomi": ".content div[property='content:encoded']",
+    "prajasakti": ".body div[property='schema:text']",
+    "vaartha": ".article-content .entry-content",
     "andhrajyothy": ".category_desc",
     "telugubulletin": ".tdc-zone .tdb_single_content"
 }
@@ -44,7 +46,6 @@ def news_post_download(url: str) -> str:
 
 def download(url: str, selector: str) -> str:
     response = requests.get(url)
-    print(response.status_code)
     # Check if the request was successful
     if response.status_code == 200:
         # Parse the HTML content of the page using BeautifulSoup
@@ -52,7 +53,6 @@ def download(url: str, selector: str) -> str:
 
         # Find the element containing the movie review (You may need to inspect the page's HTML to identify the appropriate element)
         selector = find_selector(url)
-        print(selector)
         review_element = soup.select_one(selector)
 
         if review_element:
