@@ -1,10 +1,20 @@
 import streamlit as st
+import logging
+import sys
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
+from core.util import movie_review_download
 
 load_dotenv()
-from core.util import movie_review_download
+root = logging.getLogger()
+root.setLevel(logging.INFO)
+
+handler = logging.StreamHandler(sys.stdout)
+handler.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+root.addHandler(handler)
 
 placeholders = {
     "url0": "https://www.gulte.com/moviereviews/257842/miss-shetty-mr-polishetty-movie-review",
@@ -25,6 +35,7 @@ grid = my_form.columns(2)
 def add_row(row):
     with grid[0]:
         my_form.text_input('URL', key=f'url{row}', placeholder=placeholders[f"url{row}"])
+
 
 # Loop to create rows of input widgets
 for r in range(num_rows):
