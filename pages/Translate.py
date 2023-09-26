@@ -15,7 +15,6 @@ submit = my_form.form_submit_button(label='Submit')
 def get_data():
     # Make an asynchronous call to an API or database
     result = news_post_download(input)
-    print(result)
     chat = ChatOpenAI(temperature=0, model_name="gpt-4")
     response_schemas = [
         ResponseSchema(name="post", description="new york times style news article"),

@@ -11,7 +11,7 @@ selector_dict = {
     "sakshi": ".fullstory .offset-tb1",
     "eenadu": ".fullstory .text-justify",
     "andhrabhoomi": ".content div[property='content:encoded']",
-    "prajasakti": ".body div[property='schema:text']",
+    "prajasakti": ".body .text-align-justify",
     "vaartha": ".article-content .entry-content",
     "andhrajyothy": ".category_desc",
     "telugubulletin": ".tdc-zone .tdb_single_content"
@@ -45,7 +45,10 @@ def news_post_download(url: str) -> str:
 
 
 def download(url: str, selector: str) -> str:
-    response = requests.get(url)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'
+    }
+    response = requests.get(url, headers=headers)
     # Check if the request was successful
     if response.status_code == 200:
         # Parse the HTML content of the page using BeautifulSoup
@@ -61,4 +64,4 @@ def download(url: str, selector: str) -> str:
         else:
             return ""
     else:
-        return ""
+        raise Exception(f"Failed to download review from url: {url} code: {response.status_code}")
