@@ -5,3 +5,8 @@ python-dotenv
 altair<5
 langchain
 openai
+apify-client
+chromadb
+google-api-python-client
+tiktoken
+html2text

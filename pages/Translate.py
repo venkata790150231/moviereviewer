@@ -9,10 +9,13 @@ from core.util import news_post_download
 
 st.set_page_config(page_title="Translate Telugu News")
 st.sidebar.header("News Translator")
-my_form = st.form(key='form')
-input = my_form.text_input('URL', key='url',
-                           placeholder="https://www.eenadu.net/telugu-news/india/sudha-murty-files-complaint-over-misuse-of-her-name-for-event-promotion-in-us/0700/123177262")
-submit = my_form.form_submit_button(label='Submit')
+my_form = st.form(key="form")
+input = my_form.text_input(
+    "URL",
+    key="url",
+    placeholder="https://www.eenadu.net/telugu-news/india/sudha-murty-files-complaint-over-misuse-of-her-name-for-event-promotion-in-us/0700/123177262",
+)
+submit = my_form.form_submit_button(label="Submit")
 
 
 def get_data():
@@ -20,11 +23,22 @@ def get_data():
     result = news_post_download(input)
     chat = ChatOpenAI(temperature=0, model_name="gpt-4")
     response_schemas = [
-        ResponseSchema(name="post",
-                       description="Rewrite translated text in new york times tone with less than 200 words"),
-        ResponseSchema(name="huff_title", description="Suggest Huffington Post style headline for the article"),
-        ResponseSchema(name="nypost_title", description="Suggest Newyork Post style headline for the article"),
-        ResponseSchema(name="daily_caller", description="Suggest Daily Caller style headline for the article")
+        ResponseSchema(
+            name="post",
+            description="Rewrite translated text in new york times tone with less than 350 words",
+        ),
+        ResponseSchema(
+            name="huff_title",
+            description="Suggest Huffington Post style headline for the article",
+        ),
+        ResponseSchema(
+            name="nypost_title",
+            description="Suggest Newyork Post style headline for the article",
+        ),
+        ResponseSchema(
+            name="daily_caller",
+            description="Suggest Daily Caller style headline for the article",
+        ),
     ]
     output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
     template = """
@@ -37,7 +51,7 @@ def get_data():
     prompt = ChatPromptTemplate(
         messages=[HumanMessagePromptTemplate.from_template(template)],
         input_variables=["docs"],
-        partial_variables={"format_instructions": format_instructions}
+        partial_variables={"format_instructions": format_instructions},
     )
 
     _input = prompt.format_prompt(docs=result)
