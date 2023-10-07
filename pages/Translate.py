@@ -6,6 +6,7 @@ from langchain.output_parsers import ResponseSchema, StructuredOutputParser
 from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 
 from core.util import news_post_download
+from db import Post, publish
 
 st.set_page_config(page_title="Translate Telugu News")
 st.sidebar.header("News Translator")
@@ -25,7 +26,7 @@ def get_data():
     response_schemas = [
         ResponseSchema(
             name="post",
-            description="Rewrite translated text in new york times tone with less than 350 words",
+            description="Rewrite translated text in left wing style",
         ),
         ResponseSchema(
             name="huff_title",
@@ -65,6 +66,13 @@ def get_data():
 
 if submit:
     result = get_data()
+    publish(Post(
+        huff_title=result["huff_title"],
+        nypost_title=result["nypost_title"],
+        daily_caller=result["daily_caller"],
+        url=input,
+        post=result["post"]
+    ))
     st.header(result["huff_title"])
     st.header(result["nypost_title"])
     st.header(result["daily_caller"])

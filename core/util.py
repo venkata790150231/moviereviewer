@@ -10,7 +10,6 @@ selector_dict = {
     "123telugu": ".post-content",
     "sakshi": ".fullstory .offset-tb1",
     "eenadu": ".fullstory .text-justify",
-    "andhrabhoomi": ".content div[property='content:encoded']",
     "prajasakti": ".body .text-align-justify",
     "vaartha": ".article-content .entry-content",
     "andhrajyothy": ".category_desc",
@@ -44,9 +43,12 @@ def news_post_download(url: str) -> str:
     return download(url, find_selector(url))
 
 
+USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
+
+
 def download(url: str, selector: str) -> str:
     headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
+        "User-Agent": USER_AGENT
     }
     response = requests.get(url, headers=headers)
     # Check if the request was successful
@@ -54,7 +56,8 @@ def download(url: str, selector: str) -> str:
         # Parse the HTML content of the page using BeautifulSoup
         soup = BeautifulSoup(response.text, "html.parser")
 
-        # Find the element containing the movie review (You may need to inspect the page's HTML to identify the appropriate element)
+        # Find the element containing the movie review (You may need to inspect the page's HTML to identify the
+        # appropriate element)
         review_element = soup.select_one(selector)
 
         if review_element:
@@ -66,3 +69,5 @@ def download(url: str, selector: str) -> str:
         raise Exception(
             f"Failed to download review from url: {url} code: {response.status_code}"
         )
+
+# Create a new user and add it to the database

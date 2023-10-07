@@ -10,3 +10,8 @@ chromadb
 google-api-python-client
 tiktoken
 html2text
+doctran
+sqlalchemy
+psycopg2-binary
+streamlit-aggrid
+streamlit-modal
